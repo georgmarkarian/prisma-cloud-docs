@@ -31,8 +31,8 @@ Continue to <<setup-drift-detection>>
 === Set up Drift Detection
 
 For a drift detection scan to run on your repository you need to connect your AWS and Azure cloud account and code repositories to Prisma Cloud.
-After you connect the repository setup https://yor.io/[Yor] on your repository and xref:iac-tag-and-trace.adoc[enable tag and trace management]. 
-If you use CloudFormation templates, Yor tags are not needed for CloudFormation templates that are connected to your AWS account. You automatically, start to see drifts violations on the Projects page as soon as Prisma Cloud detects a gap between the the runtime and build time resources.
+After you connect the repository, setup https://yor.io/[Yor] on your repository and xref:iac-tag-and-trace.adoc[enable tag and trace management]. 
+If you use CloudFormation templates, Yor tags are not needed for CloudFormation templates that are connected to your AWS account. You automatically start to see drifts violations on the Projects page as soon as Prisma Cloud detects a gap between the the runtime and build time resources.
 
 * Onboard your AWS and Azure cloud account and code repositories to Prisma Cloud.
 +
@@ -41,11 +41,12 @@ The AWS and Azure cloud account and code repositories must be connected to Prism
 If you have previously onboarded your AWS cloud account on Prisma Cloud, you must enable the additional permissions required for a drift detection scan. See https://docs.paloaltonetworks.com/prisma/prisma-cloud/prisma-cloud-admin/connect-your-cloud-platform-to-prisma-cloud/onboard-your-aws-account/update-an-onboarded-aws-account[update an onboarded AWS account] for redeploying the stack with the required permissions that are included in the `AWSCloudFormationReadOnlyAccess` policy.
 +
 ```
-lambda:GetLayerVersion
-lambda:GetEventSourceMapping
-lambda:GetFunction
-s3:ListBucket
-sns:GetSubscriptionAttributes
+ "cloudformation:Describe*",
+ "cloudformation:EstimateTemplateCost",
+ "cloudformation:Get*",
+ "cloudformation:List*",
+ "cloudformation:ValidateTemplate",
+ "cloudformation:Detect*"
 ```
 +
 Add the Prisma Cloud IP addresses and hostname for Code Security to an allow list, to https://docs.paloaltonetworks.com/prisma/prisma-cloud/prisma-cloud-admin/get-started-with-prisma-cloud/enable-access-prisma-cloud-console.html#id7cb1c15c-a2fa-4072-%20b074-063158eeec08[enable access to the Prisma Cloud Console].
